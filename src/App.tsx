@@ -38,6 +38,14 @@ const App: React.FC = () => {
       body: JSON.stringify({ code: `VX.${precinct}.${ballot}` }),
       headers: { 'Content-Type': 'application/json' },
     })
+      .then(res => res.json())
+      .then(response => {
+        if (response.success) {
+          // TODO: better notification of success
+          // https://github.com/votingworks/bas/issues/7
+          reset()
+        }
+      })
   }
   if (precinct && ballot) {
     return (
