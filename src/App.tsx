@@ -35,7 +35,8 @@ const App: React.FC = () => {
   const programCard = () => {
     fetch('/card/write', {
       method: 'post',
-      body: JSON.stringify({ ballot, precinct }),
+      body: JSON.stringify({ code: 'VX.' + ballot + '.' + precinct }),
+      headers: { 'Content-Type': 'application/json' },
     })
   }
   if (precinct && ballot) {
@@ -49,6 +50,11 @@ const App: React.FC = () => {
             </button>
           </p>
           <p>{`{ ballot: ${ballot}, precinct: ${precinct} }`}</p>
+          <p>
+            <button onClick={programCard} type="button">
+              Program Card
+            </button>
+          </p>
         </Content>
       </Body>
     )

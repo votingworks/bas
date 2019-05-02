@@ -12,8 +12,8 @@ app = Flask(__name__, static_folder=STATIC_DIR)
 @app.route('/card/write', methods=["POST"])
 def card_write():
     content = request.get_json()
-    print(content)
-    return("yeah")
+    rv = CardInterface.write(content['code'])
+    return json.dumps({"success": rv})
     
 @app.route('/')
 def root():
