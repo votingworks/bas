@@ -32,6 +32,12 @@ const App: React.FC = () => {
     setPrecinct('')
     setBallot('')
   }
+  const programCard = () => {
+    fetch('/card/write', {
+      method: 'post',
+      body: JSON.stringify({ ballot, precinct }),
+    })
+  }
   if (precinct && ballot) {
     return (
       <Body>
