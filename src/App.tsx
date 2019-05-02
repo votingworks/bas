@@ -35,7 +35,7 @@ const App: React.FC = () => {
   const programCard = () => {
     fetch('/card/write', {
       method: 'post',
-      body: JSON.stringify({ code: 'VX.' + ballot + '.' + precinct }),
+      body: JSON.stringify({ code: `VX.${precinct}.${ballot}` }),
       headers: { 'Content-Type': 'application/json' },
     })
   }
