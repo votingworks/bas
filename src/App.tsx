@@ -187,6 +187,7 @@ const App: React.FC = () => {
               <p>Loading Election Definition from Clerk Card…</p>
             ) : (
               <React.Fragment>
+                <p>Remove card when finished making changes.</p>
                 <p>
                   <Text as="span" voteIcon={!!election} warningIcon={!election}>
                     {election ? (
