@@ -9,6 +9,8 @@ import {
   BallotStyle,
 } from './config/types'
 
+import { randomBase64 } from './utils/random'
+
 import Button from './components/Button'
 import CurrentVoterCard from './components/CurrentVoterCard'
 import Main, { MainChild } from './components/Main'
@@ -193,7 +195,8 @@ const App = () => {
       setIsProgrammingCard(true)
 
       const createAtSeconds = Math.round(Date.now() / 1000)
-      const code = {
+      const voterCardData: VoterCardData = {
+        id: randomBase64(),
         c: createAtSeconds,
         t: 'voter',
         pr: precinctId,
@@ -201,7 +204,7 @@ const App = () => {
       }
       fetch('/card/write', {
         method: 'post',
-        body: JSON.stringify(code),
+        body: JSON.stringify(voterCardData),
         headers: { 'Content-Type': 'application/json' },
       })
         .then(res => res.json())
@@ -221,7 +224,7 @@ const App = () => {
           window.setTimeout(() => {
             // TODO: UI Notification if unable to write to card
             // https://github.com/votingworks/bas/issues/10
-            console.log(code) // eslint-disable-line no-console
+            console.log(voterCardData) // eslint-disable-line no-console
             reset()
             setIsProgrammingCard(false)
           }, 500)
