@@ -12,6 +12,11 @@ import {
   CardAPI,
 } from './config/types'
 
+import {
+  CARD_POLLING_INTERVAL,
+  CARD_SHORT_VALUE_WRITE_DELAY,
+} from './config/globals'
+
 import useStateAndLocalStorage from './hooks/useStateWithLocalStorage'
 
 import AdminScreen from './screens/AdminScreen'
@@ -182,10 +187,11 @@ const App = () => {
         lastCardDataString = ''
         window.clearInterval(checkCardInterval)
       }
-    }, 1000)
+    }, CARD_POLLING_INTERVAL)
   }
 
   const programCard = (event: ButtonEvent) => {
+    // console.log('programCard')
     const {
       ballotStyleId: localBallotStyleId,
     } = (event.target as HTMLElement).dataset
@@ -200,6 +206,7 @@ const App = () => {
         pr: precinctId,
         bs: localBallotStyleId,
       }
+      // console.log('start fetch…')
       fetch('/card/write', {
         method: 'post',
         body: JSON.stringify(code),
@@ -207,11 +214,13 @@ const App = () => {
       })
         .then(res => res.json())
         .then(response => {
+          // console.log('response success', response)
           if (response.success) {
             window.setTimeout(() => {
+              // console.log('response success: timeout')
               setIsProgrammingCard(false)
               setIsReadyToRemove(true)
-            }, 1500)
+            }, CARD_SHORT_VALUE_WRITE_DELAY)
           }
         })
         .catch(() => {
@@ -222,7 +231,7 @@ const App = () => {
             reset()
             setIsProgrammingCard(false)
             setIsReadyToRemove(true)
-          }, 500)
+          }, CARD_SHORT_VALUE_WRITE_DELAY)
         })
     }
   }

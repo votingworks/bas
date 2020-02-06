@@ -58,6 +58,9 @@ module.exports = {
         devDependencies: true,
       },
     ],
+    "jsx-a11y/label-has-associated-control": [2, {
+      "assert": "htmlFor",
+    }],
     'no-unused-vars': 'off', // base rule must be disabled as it can report incorrect errors: https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unused-vars.md#options
     '@typescript-eslint/no-unused-vars': ['error', {
       'vars': 'all'

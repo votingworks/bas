@@ -73,9 +73,12 @@ const AdminScreen = ({
             <p>Remove card when finished making changes.</p>
             {election && (
               <React.Fragment>
-                <h1>Single Precinct Mode</h1>
+                <h1>
+                  <label htmlFor="selectPrecinct">Single Precinct Mode</label>
+                </h1>
                 <p>Select a precinct. Optionally, select a party.</p>
                 <Select
+                  id="selectPrecinct"
                   small
                   block={false}
                   value={precinctId}
