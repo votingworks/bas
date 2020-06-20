@@ -102,9 +102,13 @@ export interface CardData {
 }
 export interface VoterCardData extends CardData {
   readonly t: 'voter'
-  readonly bs: string
-  readonly pr: string
-  readonly c: number
+  readonly c: number // created date
+  readonly bs: string // ballot style id
+  readonly pr: string // precinct id
+  readonly uz?: number // used (voided)
+  readonly bp?: number // ballot printed date
+  readonly u?: number // updated date
+  readonly m?: string // mark machine id
 }
 export type OptionalVoterCardData = VoterCardData | undefined
 export interface PollworkerCardData extends CardData {
